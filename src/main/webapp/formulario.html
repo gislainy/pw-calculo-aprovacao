@@ -1,0 +1,24 @@
+<!--FORMULARIO -->
+<form class="form-horizontal" method="post">
+    <fieldset>
+        <div class="form-group">
+            <label for="nome" class="col-lg-2 control-label">Nome</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="nome" value="${param.nome}" placeholder="Nome do aluno">
+            </div>
+            <label for="frequencia" class="col-lg-2 control-label">Frequência</label>
+            <div class="col-lg-10">
+                <input type="number" step="any" class="form-control" name="frequencia" value="${param.frequencia}" placeholder="Frequência do aluno em porcentagem (sem %)">
+            </div>
+            <label for="notaFinal" class="col-lg-2 control-label">Nota final</label>
+            <div class="col-lg-10">
+                <input type="number" step="any" class="form-control" name="notaFinal" value="${param.notaFinal}" placeholder="Nota final do aluno">
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" href="aprovacao" class="btn btn-primary">Calcular</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
