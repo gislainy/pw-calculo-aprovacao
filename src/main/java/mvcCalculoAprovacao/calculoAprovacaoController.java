@@ -9,23 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value = "/aprovacao");
+@WebServlet(value = "/aprovacao")
 public class calculoAprovacaoController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
   
     String nome = req.getParameter("nome");
     String frequenciaStr = req.getParameter("frequencia");
-    float frequencia = frequenciaStr == null || frequenciaStr.isEmpty() ? 0 : Float.parseFloat(frequenciaStr);
+    Float frequencia = frequenciaStr == null || frequenciaStr.isEmpty() ? 0 : Float.parseFloat(frequenciaStr);
     String notafinalStr = req.getParameter("notaFinal");
-    float notafinal = notafinalStr == null || notafinalStr.isEmpty() ? 0 : Float.parseFloat(notafinalStr);
+    Float notafinal = notafinalStr == null || notafinalStr.isEmpty() ? 0 : Float.parseFloat(notafinalStr);
     String resultado;
-    if(notafinal =!null || frequenciaStr=!null)
+    if(nome != null && notafinal != null && frequencia !=  null && notafinal != 0 && frequencia != 0){
       resultado = calculoAprovacaoModel.resultado(frequencia, notafinal);
-    else resultado="Por favor, passse os dados correto!";
-    System.out.println(resultado);
-    req.setAttribute("resultado", resultado);
-
+      req.setAttribute("resultado", (nome!=null ? nome + " foi "  : " - " )+resultado);
+      String tipoDeMensagem = calculoAprovacaoModel.tipoDeMensagem(resultado);
+      req.setAttribute("tipoDeMensagem", tipoDeMensagem);
+      req.setAttribute("tituloMensagem", "Resultado");
+    }
+    else {
+      resultado="Por favor, passse os dados correto!";
+      req.setAttribute("resultado", resultado);
+      req.setAttribute("tipoDeMensagem", "warning");
+      req.setAttribute("tituloMensagem", "Erro");
+    }
     String nextJsp = "/index.jsp";
     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJsp);
     dispatcher.forward(req, resp);

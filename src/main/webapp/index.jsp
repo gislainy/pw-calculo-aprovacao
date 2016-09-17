@@ -9,7 +9,7 @@
 
 <body>
     <!--CABEÇALHO-->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="">Calculo IMC</a>
@@ -17,10 +17,11 @@
         </div>
     </nav>
     <div class="container">
+        <!--FORMULARIO-->
         <%@ include file="formulario.html" %>
             <div class="col-lg-12">
-                <div class="alert alert-dismissible alert-success">
-                    <h4>Resultado</h4>
+                <div class="alert alert-dismissible alert-${tipoDeMensagem}">
+                    <h4>${tituloMensagem}</h4>
                     <p>
                         ${resultado}
                     </p>

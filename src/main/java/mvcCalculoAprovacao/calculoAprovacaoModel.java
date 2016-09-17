@@ -5,16 +5,24 @@ public class calculoAprovacaoModel {
         String result = "";
         boolean aprovadoPorNota = false;
         boolean aprovadoPorFrequencia = false;
-        if(notafinal > 6.0)
+        if(notafinal >= 6.0)
             aprovadoPorNota = true;
-        if(frequencia > 75.00)
+        if(frequencia >= 75.00)
             aprovadoPorFrequencia = true;
         if(aprovadoPorNota && aprovadoPorFrequencia)
-            result = "Aprovado";
+            result = "aprovado(a)";
         else if(aprovadoPorNota)
-            result = "Reprovado por frequência";
+            result = "reprovado(a) por frequência";
+        else if(aprovadoPorFrequencia)
+            result = "reprovado(a) por nota";
         else 
-            result = "Reprovado por nota e frequência";
+            result = "reprovado(a) por nota e frequência";
         return result;
+    }
+    public static String tipoDeMensagem(String result){
+        if(result.equals("aprovado(a)"))
+            return "success";
+        else 
+            return "danger";
     }
 }
